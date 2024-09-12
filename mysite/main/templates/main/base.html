@@ -48,7 +48,7 @@
                 <a href="/login">Login</a>
             {% else %}
                 <a href="/create">Create</a>
-                <a href="/2">View</a>
+                <a href="/glossary">View</a>
                 <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
                     <button type="submit" >Logout</button>
