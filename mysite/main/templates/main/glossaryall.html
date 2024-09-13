@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %}
+
+
+{% block content %}
+    <h2>All To-Do Lists</h2>
+    {% for ToDo in ToDos %}
+        <div class="input-group mb-3">
+            <div class="input-group-text"><a href="/{{ToDo.id}}">{{ToDo.name}}</a></div>
+            <div class="input-group-text">{{ToDo.user.username}}</div>
+        </div>
+        
+    {% endfor %}
+{% endblock %}

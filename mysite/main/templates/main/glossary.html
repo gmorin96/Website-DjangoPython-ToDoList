@@ -1,6 +1,6 @@
 {% extends 'main/base.html' %}
 {% block content %}
-    <h1>{{user.username}}'s To-Do Lists</h1>
+    <h2>{{user.username}}'s To-Do Lists</h2>
     <br></br>
     <form method="post" action="#">
         {% csrf_token %}
