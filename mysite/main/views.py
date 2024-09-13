@@ -28,9 +28,12 @@ def index(response, id):
                 print("invalid")
 
         elif response.POST.get("delItem"):
-            itemId = int(response.POST.get("delItem")[0])
+            itemId = int(response.POST.get("delItem").split(",")[0])
+            print(itemId)
             item = [item for item in ls.item_set.all() if itemId == item.id][0]
             item.delete()
+
+            return HttpResponseRedirect("/%i" %id)
  
  
     return render(response, "main/list.html", {"ls":ls})
