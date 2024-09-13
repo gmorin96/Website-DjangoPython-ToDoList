@@ -7,6 +7,7 @@ from .forms import CreateNewList
 
 def index(response, id):
     ls = ToDoList.objects.get(id=id)
+    print(response.POST)
  
     if response.method == "POST":
         if response.POST.get("save"):
@@ -25,14 +26,18 @@ def index(response, id):
                 ls.item_set.create(text=txt, complete=False)
             else:
                 print("invalid")
+
+        elif response.POST.get("delItem"):
+            itemId = int(response.POST.get("delItem")[0])
+            item = [item for item in ls.item_set.all() if itemId == item.id][0]
+            item.delete()
  
  
     return render(response, "main/list.html", {"ls":ls})
 
 def glossary(response):
-    AllToDos = ToDoList.objects.all()
  
-    return render(response, "main/glossary.html", {"AllToDos":AllToDos})
+    return render(response, "main/glossary.html", {})
 
 def home(response):
     return render(response,"main/home.html",{})
@@ -45,6 +50,7 @@ def create(response):
             n = form.cleaned_data["name"]
             t = ToDoList(name=n)
             t.save()
+            response.user.todolist.add(t)
 
         return HttpResponseRedirect("/%i" %t.id)
     else:

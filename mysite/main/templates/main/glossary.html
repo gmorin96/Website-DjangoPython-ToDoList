@@ -1,10 +1,10 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-    <h1>All To-Do Lists</h1>
-    {% for ToDo in AllToDos %}
-    <div class="input-group mb-3">
+    <h1>User To-Do Lists</h1>
+    {% for ToDo in user.todolist.all %}
+    <p>
         <a href="/{{ToDo.id}}">{{ToDo.name}}</a>
-    </div>
+    </p>
     {% endfor %}
 {% endblock %}
