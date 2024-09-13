@@ -39,6 +39,16 @@ def index(response, id):
     return render(response, "main/list.html", {"ls":ls})
 
 def glossary(response):
+    ToDos = response.user.todolist.all()
+    if response.method == "POST":
+        if response.POST.get("delItem"):
+                lsId = int(response.POST.get("delItem").split(",")[0])
+                print(lsId)
+                todo = [todo for todo in ToDos if lsId == todo.id][0]
+                todo.delete()
+
+                return HttpResponseRedirect("/glossary")
+
  
     return render(response, "main/glossary.html", {})
 
